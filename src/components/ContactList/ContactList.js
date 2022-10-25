@@ -1,24 +1,27 @@
 import "./contactList.css";
-import userImage from "../../assets/images/user-profile-icon-free-vector.webp";
+import { Link } from "react-router-dom";
+import Contact from "./Contact/Contact";
 
 const ContactList = ({ contacts, onDelete }) => {
   return (
-    <section className="contactList">
-      {contacts.map((contact) => {
-        const { name, email, id } = contact;
-        return (
-          <div key={id} className="item">
-            <div className="list">
-              <img src={userImage} alt="User" />
-              <div>
-                <p>name : {name}</p>
-                <p>email : {email}</p>
-              </div>
-            </div>
-            <button onClick={() => onDelete(id)}>delete</button>
-          </div>
-        );
-      })}
+    <section className="listWrapper">
+      <div className="contactList">
+        <div className="listHeader">
+          <h2>Contacts</h2>
+          <Link to="/add">
+            <button>Add</button>
+          </Link>
+        </div>
+        {contacts.map((contact, index) => {
+          return (
+            <Contact
+              key={index}
+              contact={contact}
+              onDelete={() => onDelete(contact.id)}
+            />
+          );
+        })}
+      </div>
     </section>
   );
 };

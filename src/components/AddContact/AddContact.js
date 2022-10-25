@@ -1,8 +1,10 @@
 import { useState } from "react";
-import "./addContact.css"
+import { useNavigate } from "react-router-dom";
+import "./addContact.css";
 
 const AddContact = ({ addContactHandler }) => {
   const [contact, setContact] = useState({ name: "", email: "" });
+  const history = useNavigate();
 
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -15,6 +17,7 @@ const AddContact = ({ addContactHandler }) => {
     e.preventDefault();
     addContactHandler(contact);
     setContact({ name: "", email: "" });
+    history("/");
   };
 
   return (
