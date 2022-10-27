@@ -14,7 +14,12 @@ const Contact = ({ contact, onDelete }) => {
           </div>
         </Link>
       </div>
-      <button onClick={onDelete}>delete</button>
+      <div>
+        <Link to={`/edit/${id}`}>
+          <button className="editBtn">Edit</button>
+        </Link>
+        <button onClick={()=>onDelete(id)}>Delete</button>
+      </div>
     </div>
   );
 };

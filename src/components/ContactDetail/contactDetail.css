@@ -1,0 +1,15 @@
+.detailWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.contactDetail a{
+    text-decoration:underline;
+}

@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import addOneContact from "../../services/postContactService";
-import "./addContact.css";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import getOneContact from "../../services/getOneContact";
+import updateContact from "../../services/updateContact";
 
-const AddContact = () => {
+const EditContact = ({ editContactHandler }) => {
   const [contact, setContact] = useState({ name: "", email: "" });
   const history = useNavigate();
+  const params = useParams();
 
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -17,11 +18,20 @@ const AddContact = () => {
     }
     e.preventDefault();
     try {
-      await addOneContact(contact);
-      setContact({ name: "", email: "" });
+      await updateContact(params.id, contact);
       history("/");
     } catch (error) {}
   };
+
+  useEffect(() => {
+    const localFetch = async () => {
+      try {
+        const { data } = await getOneContact(params.id);
+        setContact({ name: data.name, email: data.email });
+      } catch (error) {}
+    };
+    localFetch();
+  }, []);
 
   return (
     <form onSubmit={submitForm}>
@@ -43,9 +53,9 @@ const AddContact = () => {
           onChange={changeHandler}
         />
       </div>
-      <button type="submit">Add contact</button>
+      <button type="submit">Edit contact</button>
     </form>
   );
 };
 
-export default AddContact;
+export default EditContact;
