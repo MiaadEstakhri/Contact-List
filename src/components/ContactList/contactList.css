@@ -91,3 +91,21 @@
 .contactList input:focus {
   border: 1px solid #6d28d9;
 }
+
+@media screen and (max-width: 767px) {
+  .item {
+    width: 50%;
+  }
+
+  link button {
+    font-size: 0.8rem;
+  }
+
+  .list p {
+    font-size: 0.8rem;
+  }
+
+  .listWrapper {
+    margin: 0 2rem;
+  }
+}
